@@ -10,7 +10,7 @@ const profileRouter = express.Router()
 profileRouter.get('/profile/view', userAuth, (req, res) => {
     try {
         const { user } = req
-        const userCopy = JSON.parse(JSON.stringify(user))
+        const userCopy = JSON.parse(JSON.stringify(user))//this is done to avoid sending the password on the frontend
         delete userCopy.password
         return res.send(userCopy)
     }
@@ -42,10 +42,7 @@ profileRouter.patch('/profile/edit', userAuth, async (req, res) => {
             }
         }
         const user = await loggedInUser.save()
-        res.json({
-            message: `${user.name} your profile has been updated successfully`
-            , data: user
-        })
+        return res.json({ success: true, message: "Profile Update Successfully", data: user })
     }
     catch (err) {
         return res.status(400).send(err.message)

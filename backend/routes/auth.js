@@ -32,8 +32,8 @@ authRouter.post('/signup', async (req, res) => {
         const token = jwt.sign({ _id: user._id }, process.env.PRIVATE_KEY, { expiresIn: "7d" })
         res.cookie("token", token, {
             httpOnly: true,
-            secure: true,
-            sameSite: "none",
+            secure: false,
+            sameSite: 'Lax',
             path: "/"
         })
 
@@ -58,8 +58,8 @@ authRouter.post('/login', async (req, res) => {
             const token = jwt.sign({ _id: user._id }, process.env.PRIVATE_KEY, { expiresIn: "7d" })
             res.cookie("token", token, {
                 httpOnly: true,
-                secure: true,
-                sameSite: "none",
+                secure: false,
+                sameSite: 'Lax',
                 path: "/"
             })
             return res.send(user)
@@ -79,11 +79,11 @@ authRouter.post('/logout', (req, res) => {
     try {
         res.cookie("token", "",
             {
-               httpOnly: true,
-               secure: true,
-               sameSite: "none",
-               path: "/",
-               expires: new Date(0)
+                httpOnly: true,
+                secure: false,
+                sameSite: 'Lax',
+                path: "/",
+                expires: new Date(0)
             })
         res.clearCookie("token");
         return res.send("Signout Successful")

@@ -11,6 +11,7 @@ import { BACKEND_URL } from '../hardcoded/constants'
 export default function Profile() {
   const loggedInUser = useSelector(store => store.user)
   const dispatch = useDispatch()
+  const { isMobileOptions } = useSelector(store => store.switch)
   const [name, setName] = useState(loggedInUser?.name)
   const [about, setAbout] = useState(loggedInUser?.about)
   const [skills, setSkills] = useState(loggedInUser?.skills)
@@ -19,6 +20,7 @@ export default function Profile() {
   const [isUploading, setIsUploading] = useState(false)
   const { loader } = useSelector(store => store?.switch)
   const { isProfileEdit } = useSelector(store => store?.switch)
+  const user = useSelector(store => store.user)
 
   const handleProfileEdit = async () => {
 
@@ -33,7 +35,7 @@ export default function Profile() {
     }
     catch (err) {
       dispatch(setLoader(false))
-      toast.error("Error in getting Profile")
+      toast.error(err.response.data)
     }
 
   }
@@ -44,8 +46,8 @@ export default function Profile() {
   }, [loggedInUser])
 
   return loader ? <Loader /> : (
-    <div className='flex justify-center h-[50%] mt-2 items-center'>
-      <div className='md:h-[77%]'>
+    <div className={`flex justify-center items-center ${isMobileOptions ? "-z-10" : "z-auto"}`}>
+      <div className='relative top-10'>
         <div className='flex justify-center'>
           <img src={loggedInUser?.photoUrl} alt="" className='size-20 md:hidden rounded-full' />
         </div>
@@ -55,10 +57,13 @@ export default function Profile() {
           setIsUploading={setIsUploading} isUploading={isUploading} />}
       </div>
 
-      <div className='hidden bg-[#00092d] opacity-90 h-[75%] p-2 w-72 m-2 md:w-92 md:flex flex-col rounded-lg'>
+      <div className={`hidden bg-[#00092d] opacity-90 p-2 w-72 m-2 md:w-92 md:flex flex-col rounded-lg justify-center items-center relative top-10`}>
         <div className='h-[50%] flex flex-col items-center justify-center'>
           <img src={loggedInUser?.photoUrl} alt="" className='rounded-full size-32 m-2 object-center' />
-          <h2 className='text-[#FEFFFE] font-semibold text-2xl'>{name}</h2>
+          <div className='flex justify-center items-center gap-3'>
+            <h2 className='text-[#FEFFFE] font-semibold text-2xl'>{name}</h2>
+            {user?.isPremium && <i class="fa-regular fa-circle-check text-xl text-[#FEFFFE]"></i>}
+          </div>
         </div>
         <div className=' h-[50%] flex flex-col text-[#FEFFFE]'>
           <div className='flex flex-col gap-1 items-start p-4 flex-wrap '>

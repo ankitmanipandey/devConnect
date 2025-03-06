@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema({
     emailId: {
         type: String,
         required: true,
+        unique:true,
         trim: true
     },
 
@@ -32,10 +33,19 @@ const userSchema = new mongoose.Schema({
         maxLength: 150,
         default: "NewBee"
     },
-
     skills: {
-        type: [String]
+        type: [String],
+        default: ["Reading"]
     },
+    isPremium: {
+        type: Boolean,
+        default: false
+    },
+    membershipType: {
+        type: String,
+        default: "None"
+    }
+
 })
 const User = mongoose.model('User', userSchema)
 

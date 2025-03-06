@@ -4,7 +4,7 @@ const ConnectionRequest = require('../model/connectionRequest')
 const userRouter = express.Router()
 const User = require('../model/user')
 
-const USER_SAFE_DATA = "name skills about photoUrl emailId"
+const USER_SAFE_DATA = "name skills about photoUrl emailId isPremium membershipType"
 
 //get all the pending requests
 

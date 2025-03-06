@@ -25,13 +25,14 @@ export default function MobileOptions() {
         }
     }
     return loader ? <Loader /> : (
-        <div className={`fixed h-60 w-32 p-2 z-50 rounded-l right-0 top-14 bg-[#00092d] transition-all duration-200 ease-in-out ${isMobileOptions ? "translate-x-0" : "translate-x-full"} `}>
-            <Link to={"/feed"}><li className="list-none mb-1 text-[#FEFFFE] cursor-pointer border-1 border-transparent transition-all duration-200 ease-in-out px-2 py-1 rounded-xl hover:bg-[#FEFFFE] hover:text-black">Feed</li></Link>
-            <Link to={"/requests"}><li className="list-none mb-1 text-[#FEFFFE] cursor-pointer border-1 border-transparent transition-all duration-200 ease-in-out px-2 py-1 rounded-xl hover:bg-[#FEFFFE] hover:text-black ">Requests</li></Link>
-            <Link to={"/connections"}><li className="list-none mb-1 text-[#FEFFFE] cursor-pointer border-1 border-transparent transition-all duration-200 ease-in-out px-2 py-1 rounded-xl hover:bg-[#FEFFFE] hover:text-black ">Connections</li></Link>
-            <Link to={"/messages"}><li className="list-none mb-1 text-[#FEFFFE] cursor-pointer border-1 border-transparent transition-all duration-200 ease-in-out px-2 py-1 rounded-xl hover:bg-[#FEFFFE] hover:text-black ">Messages</li></Link>
-            <Link to={"/profile"}><li className="list-none mb-1 text-[#FEFFFE] cursor-pointer border-1 border-transparent transition-all duration-200 ease-in-out px-2 py-1 rounded-xl hover:bg-[#FEFFFE] hover:text-black " onClick={() => dispatch(toggleProfileEdit(true))}>Profile</li></Link>
-            <Link to={"/login"}><li className="list-none mb-1 text-[#FEFFFE] cursor-pointer border-1 border-transparent transition-all duration-200 ease-in-out px-2 py-1 rounded-xl hover:bg-[#FEFFFE] hover:text-black " onClick={handleSignOut}>SignOut</li></Link>
+        <div className={`fixed h-67 w-32 p-2 z-50 rounded-l text-[#FEFFFE] right-0 top-14 bg-[#00032d] transition-all duration-200 ease-in-out ${isMobileOptions ? "translate-x-0" : "translate-x-full"} `}>
+            <Link to={"/feed"}><li className="list-none mb-1 r border-1 border-transparent transition-all duration-200 ease-in-out px-2 py-1 rounded-xl hover:bg-[#FEFFFE] hover:text-black">Feed</li></Link>
+            <Link to={"/requests"}><li className="list-none mb-1 cursor-pointer border-1 border-transparent transition-all duration-200 ease-in-out px-2 py-1 rounded-xl hover:bg-[#FEFFFE] hover:text-black ">Requests</li></Link>
+            <Link to={"/connections"}><li className="list-none mb-1 cursor-pointer border-1 border-transparent transition-all duration-200 ease-in-out px-2 py-1 rounded-xl hover:bg-[#FEFFFE] hover:text-black ">Connections</li></Link>
+            <Link to={"/premium"}><li className="list-none mb-1 cursor-pointer border-1 border-transparent transition-all duration-200 ease-in-out px-2 py-1 rounded-xl hover:bg-[#FEFFFE] hover:text-black ">Premium</li></Link>
+            <Link to={"/chat"}><li className="list-none mb-1 cursor-pointer border-1 border-transparent transition-all duration-200 ease-in-out px-2 py-1 rounded-xl hover:bg-[#FEFFFE] hover:text-black ">Chat</li></Link>
+            <Link to={"/profile"}><li className="list-none mb-1 cursor-pointer border-1 border-transparent transition-all duration-200 ease-in-out px-2 py-1 rounded-xl hover:bg-[#FEFFFE] hover:text-black " onClick={() => dispatch(toggleProfileEdit(true))}>Profile</li></Link>
+            <Link to={"/login"}><li className="list-none mb-1 cursor-pointer border-1 border-transparent transition-all duration-200 ease-in-out px-2 py-1 rounded-xl hover:bg-[#FEFFFE] hover:text-black " onClick={handleSignOut}>SignOut</li></Link>
         </div>
     )
 }

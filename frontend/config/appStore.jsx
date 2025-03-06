@@ -4,6 +4,7 @@ import userReducer from "../config/userSlice"
 import feedReducer from "../config/feedSlice"
 import requestReducer from "../config/requestSlice"
 import connectionReducer from "./connectionSlice"
+import chatReducer from "./chatSlice"
 const appStore = configureStore({
     reducer: {
         switch: switchReducer,
@@ -11,6 +12,7 @@ const appStore = configureStore({
         feed: feedReducer,
         request: requestReducer,
         connection: connectionReducer,
+        chat: chatReducer
     }
 })
 export default appStore

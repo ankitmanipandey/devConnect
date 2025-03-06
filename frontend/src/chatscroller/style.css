@@ -1,0 +1,29 @@
+/* Custom Scrollbar for Chat Window */
+.scrollbar-hidden {
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent; /* Slightly visible */
+}
+
+/* Webkit Browsers (Chrome, Edge, Safari) */
+.scrollbar-hidden::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-hidden::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-hidden::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1); /* Subtle by default */
+  border-radius: 10px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Show scrollbar when hovering */
+.scrollbar-hidden:hover::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3); /* More visible on hover */
+}
+
+.scrollbar-hidden::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5); /* Even more visible */
+}

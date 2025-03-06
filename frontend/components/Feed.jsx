@@ -12,6 +12,7 @@ export default function Feed() {
   const dispatch = useDispatch()
   const feedUser = useSelector(store => store?.feed)
   const loader = useSelector(store => store?.switch?.loader)
+  const { isMobileOptions } = useSelector(store => store.switch)
 
   const handleFeed = async () => {
     dispatch(setLoader(true))
@@ -32,14 +33,14 @@ export default function Feed() {
 
   if (!feedUser || feedUser.length === 0)
     return (
-      <p className='text-2xl md:text-4xl text-white text-center' >
+      <p className='text-2xl md:text-4xl text-[#FEFFFE] text-center' >
         No Feed Available
       </p>)
 
 
   return loader ? <Loader /> : (
-    <div className='w-full min-h-screen fixed flex justify-center items-center '>
-      {feedUser.map((user) => { return < UserCard userId={user?._id} key={user?._id} userName={user?.name} about={user?.about} photoUrl={user?.photoUrl || "https://t4.ftcdn.net/jpg/01/19/32/93/240_F_119329387_sUTbUdeyhk0nuhNw5WaFvOyQFmxeppjX.jpg"} /> })}
+    <div className={`w-full h-screen flex justify-center items-center ${isMobileOptions ? "-z-10" : "z-auto"}`}>
+      {feedUser?.map((user) => { return < UserCard userId={user?._id} key={user?._id} userName={user?.name} about={user?.about} isPremium={user?.isPremium} photoUrl={user?.photoUrl || "https://t4.ftcdn.net/jpg/01/19/32/93/240_F_119329387_sUTbUdeyhk0nuhNw5WaFvOyQFmxeppjX.jpg"} /> })}
     </div>
   )
 }

@@ -7,6 +7,9 @@ const validatePatch = (req) => {
     if (!isAllowed) {
         throw new Error("Update not allowed")
     }
+    if (!about) {
+        throw new Error("About is Required!")
+    }
     if (name && name.length >= 20) {
         throw new Error("Maximum length should be 15")
     }

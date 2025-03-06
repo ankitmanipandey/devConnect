@@ -15,6 +15,7 @@ the State variable then only user would be able to press the sign up button.
 
 
 
-5.loader,responsive,toast
+5.I was not getting cookie on the browser because i was not on https , so i changed secure:false and sameSite:"Lax"
 
 
+6. I was writing my webhook secret key incorrectly ,so the problem was happening,and make sure your signature for validation is always in raw form ,does not provide express.json() to it otherwise it will fail validation. 

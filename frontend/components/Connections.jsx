@@ -11,6 +11,7 @@ import { BACKEND_URL } from '../hardcoded/constants'
 export default function Connections() {
   const dispatch = useDispatch()
   const connections = useSelector(store => store.connection)
+  const { isMobileOptions } = useSelector(store => store.switch)
   const loader = useSelector(store => store.switch.loader)
   const fetchConnections = async () => {
     try {
@@ -30,12 +31,12 @@ export default function Connections() {
 
   if (!connections || connections.length === 0)
     return (
-      <p className='text-2xl md:text-4xl text-white text-center' >
+      <p className='text-2xl md:text-4xl text-[#FEFFFE] text-center' >
         No Connections Available
       </p>)
 
   return loader ? <Loader /> : (
-    <div className='w-full min-h-screen fixed flex flex-col mt-10 items-center gap-3'>
+    <div className={`w-full h-screen flex flex-col p-2 items-center gap-3 ${isMobileOptions ? "-z-10" : "z-auto"}`}>
       {connections.map((connection) => <ConnectionCard key={connection._id} connection={connection} />)}
     </div>
   )

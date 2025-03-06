@@ -40,8 +40,8 @@ const Body = () => {
     }, [])
 
     return (
-        <div>
-            <img src={BACKGROUND_IMAGE} alt="bg-image" className=" absolute -z-10 object-cover h-full w-full" />
+        <div className="h-screen flex  w-screen flex-col">
+            <img src={BACKGROUND_IMAGE} alt="bg-image" className="fixed -z-10 object-cover w-screen h-screen" />
             <Navbar />
             <Outlet />
         </div>

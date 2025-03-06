@@ -56,8 +56,8 @@ const Login = () => {
       if (res.status === 200) {
         navigate("/feed")
         dispatch(addUser(res.data))
-        dispatch(setLoader(false))
         toast.success("Logged In Successfully")
+        dispatch(setLoader(false))
       }
 
     }
@@ -147,7 +147,7 @@ const Login = () => {
               <div className="flex items-center border-1 gap-1 px-1 bg-gray-700 rounded-lg justify-center">
                 <i className="fa-solid fa-envelope"></i>
                 <input
-                  type=""
+                  type="text"
                   name="email" placeholder="Email id"
                   autoComplete="true"
                   value={emailId}
