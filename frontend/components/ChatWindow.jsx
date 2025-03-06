@@ -41,7 +41,6 @@ export default function ChatWindow({ user }) {
             const { chatMessage, senderId, createdAt } = newMessage
             chatMessages?.length > 0 ? setChatMessages((prev = []) => [...prev, { chatMessage, senderId, createdAt }])
                 : setChatMessages([])
-            getChatData()
         })
 
         return (() => {
@@ -57,8 +56,7 @@ export default function ChatWindow({ user }) {
             loggedInUserId,
             targetUserId,
             message
-        })
-        getChatData()
+        })   
         setMessage("")
     }
     const handleKeyDown = (e) => {
