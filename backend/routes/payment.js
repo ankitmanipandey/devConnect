@@ -36,12 +36,27 @@ paymentRouter.post("/create-checkout-session/:type", userAuth, async (req, res) 
                 membershipType: planType,
                 additional_info: "Special discount applied"
             },
-            success_url: `${FRONTEND_URL}premium`,
+            success_url: `https://devconnect-backend-bgdz.onrender.com/payment/success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${FRONTEND_URL}/premium`,
         });
         return res.json({ id: session.id });
     } catch (error) {
         return res.status(500).json({ error: error.message });
+    }
+});
+paymentRouter.get('/success', async (req, res) => {
+    try {
+        const sessionId = req.query.session_id;
+        const session = await stripe.checkout.sessions.retrieve(sessionId);
+
+        const { membershipType } = session.metadata;
+
+        res.cookie('membership', membershipType, { httpOnly: true, maxAge: 900000 });
+
+        res.redirect(`${FRONTEND_URL}/premium`);
+    } catch (error) {
+        console.error('Error in /success:', error);
+        res.redirect(`${FRONTEND_URL}/premium?error=payment_failed`);
     }
 });
 
