@@ -39,10 +39,8 @@ export default function ChatWindow({ user }) {
 
         newSocket.on('messageReceived', (newMessage) => {
             const { chatMessage, senderId, createdAt } = newMessage
-            if (chatMessages.length === 0) {
-                setChatMessages([])
-            }
-            setChatMessages((prev) => [...prev, { chatMessage, senderId, createdAt }])
+            chatMessages?.length > 0 ? setChatMessages((prev) => [...prev, { chatMessage, senderId, createdAt }])
+                : setChatMessages([])
             getChatData()
         })
 
@@ -55,12 +53,12 @@ export default function ChatWindow({ user }) {
     const sendMessage = () => {
         if (!message.trim()) return
 
+        getChatData()
         socket.emit('sendMessage', {
             loggedInUserId,
             targetUserId,
             message
         })
-        getChatData()
         setMessage("")
     }
     const handleKeyDown = (e) => {
