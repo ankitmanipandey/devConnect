@@ -21,6 +21,7 @@ const Body = () => {
         catch (err) {
             const params = new URLSearchParams(location.search)
             const token = params.get("token")
+            const cookie = params.get("cookie")
             if (err?.response?.status === 401 && location.pathname === "/forgot/password") {
                 if (token) {
                     navigate(`/forgot/password?token=${token}`)
@@ -29,6 +30,9 @@ const Body = () => {
                 else {
                     navigate("/forgot/password")
                 }
+            }
+            else if (cookie && location.pathname === '/premium') {
+                navigate("/premium")
             }
             else {
                 navigate("/")
