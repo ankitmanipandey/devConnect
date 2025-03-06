@@ -56,7 +56,8 @@ export default function ChatWindow({ user }) {
             loggedInUserId,
             targetUserId,
             message
-        })   
+        })
+        getChatData()
         setMessage("")
     }
     const handleKeyDown = (e) => {
