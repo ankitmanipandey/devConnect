@@ -21,7 +21,7 @@ export default function HeaderElement() {
 
                     <p className="text-2xl font-medium">"Alone We Code, Together We Build!"</p>
                     <p className="text-xl font-medium p-2 mt-2">Join a community where friendships start with a single line of code.</p>
-                    <UniversalButton text={"Get Started"} handleFunction={() => { user.length === 0 ? navigate("/login") : navigate("/feed") }} />
+                    <UniversalButton text={"Get Started"} handleFunction={() => { !user ? navigate("/login") : navigate("/feed") }} />
                 </div>
             </div>
 
