@@ -1,12 +1,12 @@
 import React from 'react'
 import axios from "axios"
 import { loadStripe } from '@stripe/stripe-js'
-import { BACKEND_URL } from '../hardcoded/constants'
 import { useSelector } from 'react-redux';
 export default function PaymentUI() {
     const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
     const user = useSelector(store => store?.user)
     const { isMobileOptions } = useSelector(store => store.switch)
+    const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
     const handleBuyBtn = async (type) => {
         try {
             const res = await axios.post(`${BACKEND_URL}/create-checkout-session/${type}`,

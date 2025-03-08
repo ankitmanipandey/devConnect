@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setTargetPhotoUrl, setTargetUserId, setTargetUserName } from "../config/chatSlice";
+import { setTargetPhotoUrl, setTargetUserId, setTargetUserName } from "../../config/Slices/chatSlice";
 
 export default function ChatList({ photoUrl, name, userId }) {
     const dispatch = useDispatch()

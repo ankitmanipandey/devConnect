@@ -1,16 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { removeUser } from "../config/userSlice";
+import { removeUser } from "../../config/Slices/userSlice";
 import axios from "axios";
-import { setLoader, toggleProfileEdit } from "../config/switchSlice";
-import Loader from "./Loader";
+import { setLoader, toggleProfileEdit } from "../../config/Slices/switchSlice";
+import Loader from "../Utilities/Loader";
 import { toast } from "react-toastify"
-import { BACKEND_URL } from "../hardcoded/constants";
 
 export default function MobileOptions() {
     const dispatch = useDispatch()
     const { loader } = useSelector(store => store?.switch)
     const { isMobileOptions } = useSelector(store => store?.switch)
+    const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
     const handleSignOut = async () => {
         try {
             dispatch(setLoader(true))

@@ -1,18 +1,19 @@
 import React, { useEffect } from 'react'
-import ConnectionCard from './ConnectionCard'
+import ConnectionCard from '../../components/Connections/ConnectionCard'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { addConnections } from '../config/connectionSlice'
-import { setLoader } from '../config/switchSlice'
+import { addConnections } from '../../config/Slices/connectionSlice'
+import { setLoader } from '../../config/Slices/switchSlice'
 import { toast } from "react-toastify"
-import Loader from './Loader'
-import { BACKEND_URL } from '../hardcoded/constants'
+import Loader from '../Utilities/Loader'
+import EmptyStore from '../Utilities/EmptyStore'
 
 export default function Connections() {
   const dispatch = useDispatch()
   const connections = useSelector(store => store.connection)
   const { isMobileOptions } = useSelector(store => store.switch)
   const loader = useSelector(store => store.switch.loader)
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
   const fetchConnections = async () => {
     try {
       dispatch(setLoader(true))
@@ -29,15 +30,13 @@ export default function Connections() {
     fetchConnections()
   }, [])
 
-  if (!connections || connections.length === 0)
-    return (
-      <p className='text-2xl md:text-4xl text-[#FEFFFE] text-center' >
-        No Connections Available
-      </p>)
+  if (loader) return <Loader />
 
-  return loader ? <Loader /> : (
-    <div className={`w-full h-screen flex flex-col p-2 items-center gap-3 ${isMobileOptions ? "-z-10" : "z-auto"}`}>
-      {connections.map((connection) => <ConnectionCard key={connection._id} connection={connection} />)}
-    </div>
-  )
+  return connections?.length === 0 ? <EmptyStore text={"Connections"} />
+    :
+    (
+      <div className={`w-full h-screen flex flex-col p-2 items-center gap-3 ${isMobileOptions ? "-z-10" : "z-auto"}`} >
+        {connections?.map((connection) => <ConnectionCard key={connection?._id} connection={connection} />)}
+      </div>
+    )
 }

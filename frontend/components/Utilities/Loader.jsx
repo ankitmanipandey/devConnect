@@ -1,7 +1,7 @@
 import React from 'react'
 import { Bars } from 'react-loader-spinner'
 import Lottie from 'lottie-react'
-import loaderAnimation from '../animations/loaderAnimation'
+import loaderAnimation from '../../animations/loaderAnimation.json'
 export default function Loader() {
     return (
         <div className='flex justify-center items-center h-screen fixed w-full bg-transparent'>

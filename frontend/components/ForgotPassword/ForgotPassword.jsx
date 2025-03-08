@@ -1,11 +1,10 @@
 import { useState } from "react"
 import axios from "axios"
-import { BACKEND_URL } from "../hardcoded/constants"
 import { toast } from "react-toastify"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { setLoader } from "../config/switchSlice"
-import Loader from "./Loader"
+import { setLoader } from "../../config/Slices/switchSlice"
+import Loader from "../Utilities/Loader"
 
 export default function ForgotPassword() {
     const navigate = useNavigate()
@@ -15,6 +14,7 @@ export default function ForgotPassword() {
     const loader = useSelector(store => store.switch.loader)
     const [emailId, setEmailId] = useState("")
     const [password, setPassword] = useState("")
+    const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
     const handleVerifyBtn = async () => {
         try {

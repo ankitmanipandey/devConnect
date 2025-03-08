@@ -1,20 +1,20 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateConnections } from '../config/connectionSlice'
+import { updateConnections } from '../../config/Slices/connectionSlice'
 import ConnectionDetailCard from './ConnectionDetailCard'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { setLoader } from '../config/switchSlice'
-import Loader from './Loader'
-import { BACKEND_URL } from '../hardcoded/constants'
-import { setTargetPhotoUrl, setTargetUserId, setTargetUserName } from '../config/chatSlice'
+import { setIsDetailCard, setLoader } from '../../config/Slices/switchSlice'
+import Loader from '../Utilities/Loader'
+import { setTargetPhotoUrl, setTargetUserId, setTargetUserName } from '../../config/Slices/chatSlice'
 
 export default function ConnectionCard({ connection }) {
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
     const loader = useSelector(store => store.switch.loader)
-    const [isDetailCard, setIsDetailCard] = useState(false);
+    const { isDetailCard } = useSelector(store => store.switch)
 
     const handleRemove = async () => {
         try {
@@ -40,12 +40,11 @@ export default function ConnectionCard({ connection }) {
                 <p>{connection?.skills}</p>
                 <div className='flex gap-4 p-2 font-medium text-[#FEFFFE]'>
                     <button className='py-2 px-3 bg-green-700 rounded-lg cursor-pointer transition-all duration-150 ease-in-out hover:scale-105' onClick={() => { dispatch(setTargetUserId(connection?._id)); dispatch(setTargetUserName(connection?.name)); dispatch(setTargetPhotoUrl(connection?.photoUrl)); navigate("/chat") }}>Chat</button>
-                    <button className='py-2 px-3 bg-blue-500 rounded-lg cursor-pointer transition-all duration-150 ease-in-out hover:scale-105' onClick={() => { setIsDetailCard(true) }}>Details</button>
+                    <button className='py-2 px-3 bg-blue-500 rounded-lg cursor-pointer transition-all duration-150 ease-in-out hover:scale-105' onClick={() => { dispatch(setIsDetailCard(true)) }}>Details</button>
                     <button className='py-2 px-3 bg-red-500 rounded-lg cursor-pointer transition-all duration-150 ease-in-out hover:scale-105' onClick={handleRemove}>Remove</button>
                 </div>
             </div >
-            {isDetailCard && <ConnectionDetailCard connection={connection} setIsDetailCard={setIsDetailCard} />
-            }
+            {isDetailCard && <ConnectionDetailCard connection={connection} />}
 
         </>
     )

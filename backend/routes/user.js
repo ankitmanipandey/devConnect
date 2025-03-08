@@ -119,5 +119,21 @@ userRouter.delete("/user/remove/connection/:userId", userAuth, async (req, res) 
 
 })
 
+//deleting user Account
+userRouter.delete("/user/delete/account/:userId", userAuth, async (req, res) => {
+    try {
+        const loggedInUserId = req.user._id.toString()
+        const { userId } = req.params
+        if (userId !== loggedInUserId) {
+            return res.status(400).json({ success: false, message: "You are not authorized to Delete this Account" })
+        }
+        await User.findOneAndDelete({ _id: userId })
+        return res.json({ success: true, message: "GoodBye! We will Miss You" })
+    }
+    catch (err) {
+        return res.json({ success: false, message: "Error in deleting account" })
+    }
+})
+
 
 module.exports = userRouter

@@ -14,7 +14,7 @@ const validatePatch = (req) => {
         throw new Error("Maximum length should be 15")
     }
     if (skills && skills.length > 10) {
-        throw new Error("Skills are more than 10!")
+        throw new Error("Skills can't be more than 10!")
     }
     if (photoUrl && !validator.isURL(photoUrl)) {
         throw new Error("Valid Url is required for Image")

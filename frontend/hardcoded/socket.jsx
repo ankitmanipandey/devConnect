@@ -1,6 +1,5 @@
 import io from 'socket.io-client'
-import { BACKEND_URL } from './constants'
-
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 export const createSocketConnection = () => {
     return io(BACKEND_URL)
 }

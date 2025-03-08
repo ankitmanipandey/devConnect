@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import ProfileEditCard from './ProfileEditCard'
 import axios from 'axios'
-import { addUser } from '../config/userSlice'
-import { setLoader, toggleProfileEdit } from '../config/switchSlice'
-import Loader from './Loader'
+import { addUser } from '../../config/Slices/userSlice'
+import { setLoader, toggleProfileEdit } from '../../config//Slices/switchSlice'
+import Loader from '../Utilities/Loader'
 import { toast } from 'react-toastify'
-import { BACKEND_URL } from '../hardcoded/constants'
 
 export default function Profile() {
   const loggedInUser = useSelector(store => store.user)
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
   const dispatch = useDispatch()
   const { isMobileOptions } = useSelector(store => store.switch)
   const [name, setName] = useState(loggedInUser?.name)
@@ -62,7 +62,7 @@ export default function Profile() {
           <img src={loggedInUser?.photoUrl} alt="" className='rounded-full size-32 m-2 object-center' />
           <div className='flex justify-center items-center gap-3'>
             <h2 className='text-[#FEFFFE] font-semibold text-2xl'>{name}</h2>
-            {user?.isPremium && <i class="fa-regular fa-circle-check text-xl text-[#FEFFFE]"></i>}
+            {user?.isPremium && <i className="fa-regular fa-circle-check text-xl text-[#FEFFFE]"></i>}
           </div>
         </div>
         <div className=' h-[50%] flex flex-col text-[#FEFFFE]'>

@@ -1,15 +1,15 @@
 import axios from 'axios'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateFeed } from '../config/feedSlice'
-import { setLoader } from '../config/switchSlice'
-import Loader from './Loader'
+import { updateFeed } from '../../config/Slices/feedSlice'
+import { setLoader } from '../../config/Slices/switchSlice'
+import Loader from '../Utilities/Loader'
 import { toast } from 'react-toastify'
-import { BACKEND_URL } from '../hardcoded/constants'
 
 export default function UserCard({ userName, about, photoUrl, userId, isPremium }) {
     const dispatch = useDispatch()
     const { loader } = useSelector(store => store?.switch)
+    const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
     const handleIgnore = async () => {
         try {
             dispatch(setLoader(true))

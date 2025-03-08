@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from "react-redux"
-import UniversalButton from "./UniversalButton"
-import { setIsEmailVerified, setLoader, toggleSignUp } from "../config/switchSlice"
+import UniversalButton from "../Utilities/UniversalButton"
+import { setIsEmailVerified, setLoader, toggleSignUp } from '../../config/Slices/switchSlice'
 import { useState } from "react"
 import axios from "axios"
 import { Link, useNavigate } from "react-router-dom"
-import { addUser } from "../config/userSlice"
+import { addUser } from "../../config/Slices/userSlice"
 import { toast } from "react-toastify"
-import Loader from "./Loader"
-import { BACKEND_URL, CLOUDINARY_URL, DEFAULT_PHOTOURL } from "../hardcoded/constants"
+import Loader from "../Utilities/Loader"
+import { CLOUDINARY_URL, DEFAULT_PHOTOURL } from '../../hardcoded/constants'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -20,6 +20,7 @@ const Login = () => {
   const [photoUrl, setPhotoUrl] = useState(DEFAULT_PHOTOURL)
   const [about, setAbout] = useState("")
   const loader = useSelector(store => store.switch.loader)
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
   const handlePhotoUpload = async (event) => {
     dispatch(setLoader(true))
@@ -36,7 +37,7 @@ const Login = () => {
       })
       const photoPath = await res.json()
       setPhotoUrl(photoPath?.url)
-      toast.success("Save to Upload the photo")
+      toast.success("Sign Up to  Upload Profile")
     }
     catch (err) {
       toast.error("Error in Uploading the data")
@@ -73,9 +74,9 @@ const Login = () => {
       const res = await axios.post(`${BACKEND_URL}/signup`, {
         name, emailId, password, skills, ...(photoUrl && { photoUrl }), about
       }, { withCredentials: true })
-      if (res.status === 200) {
+      if (res?.status === 200) {
         navigate("/feed")
-        dispatch(addUser(res.data))
+        dispatch(addUser(res?.data))
         dispatch(setLoader(false))
         toast.success("Signed Up Successfully")
       }

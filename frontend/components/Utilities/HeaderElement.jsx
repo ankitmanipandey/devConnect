@@ -1,11 +1,11 @@
 import Lottie from "lottie-react"
-import manwithcomputer from "../animations/manwithcomputer.json"
+import manwithcomputer from "../../animations/manwithcomputer.json"
 import { useNavigate } from "react-router-dom"
 import UniversalButton from "./UniversalButton"
 import { useSelector } from "react-redux"
 export default function HeaderElement() {
     const navigate = useNavigate()
-    const user = useSelector(store => store.user)
+    const user = useSelector(store => store?.user)
     return (
         <div className='h-screen w-full fixed flex justify-center items-center px-4'>
             <div className=' bg-[#00092d] opacity-90 w-full max-w-3xl md:w-3/5 rounded-lg p-5 flex flex-col items-center  md:-top-6'>
@@ -21,7 +21,7 @@ export default function HeaderElement() {
 
                     <p className="text-2xl font-medium">"Alone We Code, Together We Build!"</p>
                     <p className="text-xl font-medium p-2 mt-2">Join a community where friendships start with a single line of code.</p>
-                    <UniversalButton text={"Get Started"} handleFunction={() => { !user ? navigate("/login") : navigate("/feed") }} />
+                    <UniversalButton text={"Get Started"} handleFunction={() => { user.length === 0 ? navigate("/login") : navigate("/feed") }} />
                 </div>
             </div>
 

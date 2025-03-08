@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
-import EmptyChat from './EmptyChat'
+import EmptyChat from './EmptyChat.jsx'
 import "/src/chatscroller/style.css"
-import { createSocketConnection } from '../hardcoded/socket.jsx'
+import { createSocketConnection } from '../../hardcoded/socket.jsx'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { BACKEND_URL } from '../hardcoded/constants.jsx'
 
 export default function ChatWindow({ user }) {
+    const BACKEND_URL = import.meta.VITE_BACKEND_URL
     const navigate = useNavigate()
     const loggedInUserId = user?._id
     const { targetUserId } = useSelector((store) => store.chat)
@@ -43,7 +43,7 @@ export default function ChatWindow({ user }) {
         })
 
         return (() => {
-            newSocket.disconnect()
+            newSocket?.disconnect()
         })
     }, [loggedInUserId, targetUserId])
 
@@ -70,7 +70,7 @@ export default function ChatWindow({ user }) {
 
 
     useEffect(() => {
-        chatEndRef.current?.scrollIntoView({ behavior: "smooth" })
+        chatEndRef?.current?.scrollIntoView({ behavior: "smooth" })
     }, [chatMessages]);
 
     return !targetUserId ? <EmptyChat />
@@ -78,7 +78,7 @@ export default function ChatWindow({ user }) {
             <>
                 <div className='border-b-1 border-white h-[92%] md:h-[90%] overflow-y-auto scrollbar-hidden w-full'>
 
-                    <div className='h-[12%] border-b-1 border-white flex items-center gap-1 sticky top-0 bg-gradient-to-r from-[#00092d] opacity-70'>
+                    <div className='h-[12%] border-b-1 border-white flex items-center gap-1 sticky top-0 bg-gradient-to-r from-[#00092d]'>
                         <div className='h-full rounded-full flex items-center p-3 w-[25%] md:w-auto'>
                             <img src={targetPhotoUrl} alt="" className='rounded-full size-12 cursor-pointer' />
                         </div>
@@ -110,7 +110,7 @@ export default function ChatWindow({ user }) {
 
                 </div>
 
-                <div className='h-[8%] md:h-[10%] flex gap-4 items-center bg-gradient-to-r from-[#00092d] opacity-70'>
+                <div className='h-[8%] md:h-[10%] flex gap-4 items-center bg-gradient-to-r from-[#00092d]'>
                     <form className='w-[90%] h-full ' onSubmit={(e) => e.preventDefault()}>
                         <input type="text"
                             value={message}

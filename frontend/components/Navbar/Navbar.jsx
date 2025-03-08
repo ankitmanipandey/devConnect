@@ -1,16 +1,16 @@
 import { useEffect, useRef } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import MobileOptions from "./MobileOptions"
-import { setLoader, toggleMobileOptions, toggleProfileNav } from "../config/switchSlice"
+import { setLoader, toggleMobileOptions, toggleProfileNav} from '../../config/Slices/switchSlice'
 import { useDispatch, useSelector } from "react-redux"
-import { removeUser } from "../config/userSlice"
+import { removeUser } from "../../config/Slices/userSlice"
 import axios from "axios"
 import { toast } from "react-toastify"
-import Loader from "./Loader"
-import { BACKEND_URL } from "../hardcoded/constants"
+import Loader from "../Utilities/Loader"
 
 const Navbar = () => {
     const loader = useSelector(store => store?.switch?.loader)
+    const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
     const location = useLocation()
     const dispatch = useDispatch()
     const profileRef = useRef()
