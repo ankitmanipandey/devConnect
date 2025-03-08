@@ -36,7 +36,7 @@ export default function Messages() {
   return loader ? <Loader /> : (
     <div className={`h-full flex overflow-hidden w-full ${(isProfileNav || isMobileOptions) ? "-z-10" : "z-auto"}`}>
       <div className='md:block hidden h-full w-[25%] border-r border-white cursor-pointer p-1 bg-[#081526] overflow-y-auto scrollbar-hidden bg-gradient-to-r from-[#00092d] opacity-80'>
-        {connections.map((connection) => {
+        {connections?.map((connection) => {
           return <ChatList key={connection?._id} userId={connection?._id}
             photoUrl={connection?.photoUrl}
             name={connection?.name} />
