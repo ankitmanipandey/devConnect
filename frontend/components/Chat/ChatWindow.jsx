@@ -7,7 +7,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
 export default function ChatWindow({ user }) {
-    const BACKEND_URL = import.meta.VITE_BACKEND_URL
+    const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
     const navigate = useNavigate()
     const loggedInUserId = user?._id
     const { targetUserId } = useSelector((store) => store.chat)
